@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using WorkSample.ClassLibrary.Entities;
 using WorkSample.ClassLibrary.RepositoryInterfaces;
 
@@ -41,7 +37,7 @@ namespace WorkSample.ClassLibrary.Services
 
         public List<TaskList> GetAll()
         {
-           return this.Repository.GetAll();
+            return this.Repository.GetAll();
         }
     }
 }
