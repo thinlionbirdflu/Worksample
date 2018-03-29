@@ -2,7 +2,7 @@
 
 namespace WorkSample.ClassLibrary.Entities
 {
-    public class TaskList
+    public class Task
     {
         public string Description { get; set; }
 

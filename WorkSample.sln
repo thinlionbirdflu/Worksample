@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkSample", "WorkSample\Wo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkSample.ClassLibrary", "WorkSample.ClassLibrary\WorkSample.ClassLibrary.csproj", "{3D4B2A93-1B9E-4F4E-BBDB-808D761CD888}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkSample.TaskList.Mvc.Api", "WorkSample.TaskList.Mvc.Api\WorkSample.TaskList.Mvc.Api.csproj", "{27E202E2-3F1E-418A-9FBF-25EDB7014F4E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{3D4B2A93-1B9E-4F4E-BBDB-808D761CD888}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D4B2A93-1B9E-4F4E-BBDB-808D761CD888}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D4B2A93-1B9E-4F4E-BBDB-808D761CD888}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27E202E2-3F1E-418A-9FBF-25EDB7014F4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27E202E2-3F1E-418A-9FBF-25EDB7014F4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27E202E2-3F1E-418A-9FBF-25EDB7014F4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27E202E2-3F1E-418A-9FBF-25EDB7014F4E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

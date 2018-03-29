@@ -45,10 +45,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config.cs" />
-    <Compile Include="Entities\TaskList.cs" />
-    <Compile Include="Repositories\TaskListRepository.cs" />
-    <Compile Include="RepositoryInterfaces\ITaskListRepository.cs" />
-    <Compile Include="Services\TaskListService.cs" />
+    <Compile Include="Entities\Task.cs" />
+    <Compile Include="Repositories\TaskRepository.cs" />
+    <Compile Include="RepositoryInterfaces\ITaskRepository.cs" />
+    <Compile Include="Services\TaskService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
