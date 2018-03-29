@@ -3,12 +3,12 @@ using WorkSample.ClassLibrary.Entities;
 
 namespace WorkSample.ClassLibrary.RepositoryInterfaces
 {
-    public interface ITaskRepository
+    public interface ITasksRepository
     {
-        void Update(int id, Task task);
+        void Update(int id, Tasks task);
 
-        void Add(Task task);
+        void Add(Tasks task);
 
-        List<Task> GetAll();
+        List<Tasks> GetAll();
     }
 }

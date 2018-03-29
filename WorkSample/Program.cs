@@ -10,11 +10,15 @@ namespace WorkSample
 {
     class Program
     {
-        public static TaskService service;
+        public static TasksService service;
 
+        /// <summary>
+        /// Default main method that starts a console application
+        /// </summary>
+        /// <param name="args">arguments passed in via command line</param>
         static void Main(string[] args)
         {
-            service = new TaskService(new TaskRepository());
+            service = new TasksService(new TasksRepository());
             MainMenu();
         }
 
@@ -56,26 +60,39 @@ namespace WorkSample
 
         public static void ViewTaskList()
         {
-            List<Task> taskLists = service.GetAll();
-            foreach (Task task in taskLists)
+            List<Tasks> taskLists = service.GetAll();
+            foreach (Tasks task in taskLists)
             {
-                Console.WriteLine(string.Format("\tDescription: {0}", task.Description));
-                Console.WriteLine(string.Format("\tAssignee: {0}", task.Assignee));
-                Console.WriteLine(string.Format("\tDue Date: {0}", task.DueDate.ToString()));
-                Console.WriteLine(string.Format("\tTask Status: {0}\n", task.IsComplete ? "Done" : "Not Done"));
+                DisplayTasks(task);
             }
             MainMenu();
         }
 
         public static void AddItemToTaskList()
         {
-            Task task = new Task();
-            Console.WriteLine("Please enter a description of the task you would like completed.");
-            task.Description = Console.ReadLine();
-            Console.WriteLine("Please enter a name of the person who you would like to complete the task.");
-            task.Assignee = Console.ReadLine();
-            Console.WriteLine("Please enter the day you would like the task completed.");
-            task.DueDate = DateTime.Parse(Console.ReadLine());
+            Tasks task = new Tasks();
+            string _input = string.Empty;
+            DateTime _dateTime = new DateTime();
+            bool _errorPresent = false;
+            do
+            {
+                Console.WriteLine("Please enter a description of the task you would like completed.");
+                _input = Console.ReadLine();
+                task.Description = _input;
+                Console.WriteLine("Please enter a name of the person who you would like to complete the task.");
+                _input = Console.ReadLine();
+                task.Assignee = _input;
+                Console.WriteLine("Please enter the day you would like the task completed in MM/DD/YYYY format.");
+                _input = Console.ReadLine();
+                DateTime.TryParse(_input, out _dateTime);
+                task.DueDate = _dateTime;
+                _errorPresent = !task.IsValid();
+                if (_errorPresent)
+                {
+                    Console.WriteLine("Sorry, but that was not a valid task. Please try again.");
+                }
+
+            } while (_errorPresent);
             service.Add(task);
             MainMenu();
 
@@ -83,24 +100,34 @@ namespace WorkSample
 
         public static void UpdateTaskListItem()
         {
-            List<Task> taskLists = service.GetAll();
+            List<Tasks> taskLists = service.GetAll();
             int _option = 1;
-            Console.WriteLine("Select an item from the task list that you would like to mark as complete");
-            foreach (Task taskList in taskLists)
+            bool _errorPresent = false;
+            string _choice = string.Empty;
+            do
             {
-                Console.WriteLine(string.Format("Task List Item #{0}", _option));
-                Console.WriteLine(string.Format("\tDescription: {0}", taskList.Description));
-                Console.WriteLine(string.Format("\tAssignee: {0}", taskList.Assignee));
-                Console.WriteLine(string.Format("\tDue Date: {0}", taskList.DueDate.ToString()));
-                Console.WriteLine(string.Format("\tTask Status: {0}\n", taskList.IsComplete ? "Done" : "Not Done"));
-                _option++;
-            }
-            _option = CheckUserInput(Console.ReadLine());
-            if (_option < taskLists.Count || _option != 0)
-            {
-                taskLists[_option - 1].IsComplete = true;
-                service.Update(_option -1, taskLists[_option - 1]);
-            }
+                Console.WriteLine("Select an item from the task list that you would like to mark as complete");
+                foreach (Tasks taskList in taskLists)
+                {
+                    Console.WriteLine(string.Format("Task List Item #{0}", _option));
+                    DisplayTasks(taskList);
+                    _option++;
+                }
+                _choice = Console.ReadLine();
+                _option = CheckUserInput(_choice);
+                if (_option <= taskLists.Count && _option != 0)
+                {
+                    taskLists[_option - 1].IsComplete = true;
+                    service.Update(_option - 1, taskLists[_option - 1]);
+                    _errorPresent = false;
+                }
+                else
+                {
+                    _errorPresent = true;
+                    Console.WriteLine(string.Format("Sorry, but {0} is not a valid menu option. Please select a valid item in your task list.", _choice));
+                }
+            } while (_errorPresent);
+
             MainMenu();
         }
 
@@ -109,6 +136,14 @@ namespace WorkSample
             int _parsedInt;
             int.TryParse(input, out _parsedInt);
             return _parsedInt;
+        }
+
+        private static void DisplayTasks(Tasks task)
+        {
+            Console.WriteLine(string.Format("\tDescription: {0}", task.Description));
+            Console.WriteLine(string.Format("\tAssignee: {0}", task.Assignee));
+            Console.WriteLine(string.Format("\tDue Date: {0}", task.DueDate.ToString()));
+            Console.WriteLine(string.Format("\tTask Status: {0}\n", task.IsComplete ? "Done" : "Not Done"));
         }
     }
 }

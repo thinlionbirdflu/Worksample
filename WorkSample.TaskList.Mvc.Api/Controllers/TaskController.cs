@@ -13,12 +13,12 @@ namespace WorkSample.TaskList.Mvc.Api.Controllers
 {
     public class TaskController : Controller
     {
-        public static TaskService service;
+        public static TasksService service;
 
         public TaskController()
         {
 
-            service = new TaskService(new TaskRepository());
+            service = new TasksService(new TasksRepository());
         }
         // GET: Task
         public ActionResult Index()
@@ -45,12 +45,19 @@ namespace WorkSample.TaskList.Mvc.Api.Controllers
 
         // POST: Task/Create
         [HttpPost]
-        public ActionResult Create(Task task)
+        public ActionResult Create(Tasks task)
         {
             try
             {
-                service.Add(task);
-                return new HttpStatusCodeResult(HttpStatusCode.OK);
+                if (task.IsValid())
+                {
+                    service.Add(task);
+                    return new HttpStatusCodeResult(HttpStatusCode.OK);
+                }
+                else
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
             }
             catch
             {
@@ -66,12 +73,19 @@ namespace WorkSample.TaskList.Mvc.Api.Controllers
 
         // POST: Task/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, Task task)
+        public ActionResult Edit(int id, Tasks task)
         {
             try
             {
-                service.Update(id, task);
-                return new HttpStatusCodeResult(HttpStatusCode.OK);
+                if (task.IsValid())
+                {
+                    service.Update(id, task);
+                    return new HttpStatusCodeResult(HttpStatusCode.OK);
+                }
+                else
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
             }
             catch
             {

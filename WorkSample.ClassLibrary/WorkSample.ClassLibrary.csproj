@@ -34,6 +34,7 @@
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -45,10 +46,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config.cs" />
-    <Compile Include="Entities\Task.cs" />
-    <Compile Include="Repositories\TaskRepository.cs" />
-    <Compile Include="RepositoryInterfaces\ITaskRepository.cs" />
-    <Compile Include="Services\TaskService.cs" />
+    <Compile Include="Entities\Tasks.cs" />
+    <Compile Include="Repositories\TasksRepository.cs" />
+    <Compile Include="RepositoryInterfaces\ITasksRepository.cs" />
+    <Compile Include="Services\TasksService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
